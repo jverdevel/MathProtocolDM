@@ -6,5 +6,7 @@ package net.protocols.application;
  *
  */
 public abstract class DefaultApplicationLayerPacket implements IApplicationLayerPacket{
+	
+	
 
 }

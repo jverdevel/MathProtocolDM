@@ -3,6 +3,8 @@ package net.protocols.application.stupidmath.op;
 import org.junit.Assert;
 import org.junit.Test;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 public class StupidMathOpTest {
 	
 	@Test
@@ -54,6 +56,11 @@ public class StupidMathOpTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void checkInValidEqualsOperand2() {
 		new StupidMathOp("=", 4, 5);
+	}
+	
+	@Test
+	public void checkEquals() {
+	    EqualsVerifier.simple().forClass(StupidMathOp.class).verify();
 	}
 	
 	public void checkValidUsePreviousOperand() {
