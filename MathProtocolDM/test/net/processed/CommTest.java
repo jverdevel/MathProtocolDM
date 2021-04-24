@@ -12,8 +12,8 @@ public class CommTest {
 	
 	@Test
 	public void checkValidCommTest() {
-		Msg msgRequest = this.mockMsg("ABC", "CBA");
-		Msg msgResponse = this.mockMsg("CBA", "ABC");
+		Msg msgRequest = this.mockMsg("ABC", "CBA", "1", "2");
+		Msg msgResponse = this.mockMsg("CBA", "ABC", "2", "1");
 		Comm comm = new Comm<>(msgRequest, msgResponse);
 		Assert.assertEquals(msgRequest, comm.getRequest());
 		Assert.assertEquals(msgResponse, comm.getResponse());
@@ -21,31 +21,46 @@ public class CommTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void invalidRequestTest() {
-		Msg msgRequest = this.mockMsg("ABC", "CBA");
+		Msg msgRequest = this.mockMsg("ABC", "CBA", "1", "2");
 		new Comm<>(msgRequest, null);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void invalidResponseTest() {
-		Msg msgResponse = this.mockMsg("ABC", "CBA");
+		Msg msgResponse = this.mockMsg("ABC", "CBA", "1", "2");
 		new Comm<>(null, msgResponse);
 	}
 	
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void invalidMismatchedRequestTest() {
-		Msg msgRequest = this.mockMsg("ABC", "CBA");
-		Msg msgResponse = this.mockMsg("CAA", "ABC");
+	public void invalidMismatchedRequestIPTest() {
+		Msg msgRequest = this.mockMsg("ABC", "CBA", "1", "2");
+		Msg msgResponse = this.mockMsg("CAA", "ABC", "2", "1");
 		new Comm<>(msgRequest, msgResponse);
 	}
 	
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void invalidMismatchedResponseTest() {
-		Msg msgRequest = this.mockMsg("AAC", "CBA");
-		Msg msgResponse = this.mockMsg("CBA", "ABC");
+	public void invalidMismatchedResponseIPTest() {
+		Msg msgRequest = this.mockMsg("AAC", "CBA", "1", "2");
+		Msg msgResponse = this.mockMsg("CBA", "ABC", "2", "1");
 		new Comm<>(msgRequest, msgResponse);
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void invalidMismatchedRequestPortTest() {
+		Msg msgRequest = this.mockMsg("ABC", "CBA", "1", "2");
+		Msg msgResponse = this.mockMsg("CBA", "ABC", "3", "1");
+		new Comm<>(msgRequest, msgResponse);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void invalidMismatchedResponsePortTest() {
+		Msg msgRequest = this.mockMsg("ABC", "CBA", "4", "2");
+		Msg msgResponse = this.mockMsg("CBA", "ABC", "2", "1");
+		new Comm<>(msgRequest, msgResponse);
+	}
+	
 	
 	
 	@Test
@@ -53,18 +68,13 @@ public class CommTest {
 	    EqualsVerifier.simple().forClass(Comm.class).verify();
 	}
 	
-	private Msg mockMsg(String origin, String destination) {
+	private Msg mockMsg(String origin, String destination, String originPort, String destinationPort) {
 		Msg msg = Mockito.mock(Msg.class);
-		AddressPort mockedOrigin = this.mockAddressPort(origin);
-		AddressPort mockedDestination = this.mockAddressPort(destination);
-		Mockito.when(msg.getOriginAddress()).thenReturn(mockedOrigin);
-		Mockito.when(msg.getDestinationAddress()).thenReturn(mockedDestination);
+		AddressPort originAddress = new AddressPort(origin, originPort);
+		AddressPort originDestination = new AddressPort(destination, destinationPort);
+		Mockito.when(msg.getOriginAddress()).thenReturn(originAddress);
+		Mockito.when(msg.getDestinationAddress()).thenReturn(originDestination);
 		return msg;
 	}
 	
-	private AddressPort mockAddressPort(String origin) {
-		AddressPort ap = Mockito.mock(AddressPort.class);
-		Mockito.when(ap.getIp()).thenReturn(origin);
-		return ap;
-	}
 }

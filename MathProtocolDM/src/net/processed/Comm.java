@@ -33,10 +33,10 @@ public class Comm<T extends IProcessedApplicationPacket> {
 		if (request == null || response == null) {
 			throw new IllegalArgumentException("Request and response can't be null");
 		}
-		if (!request.getOriginAddress().getIp().equals(response.getDestinationAddress().getIp())) {
+		if (!request.getOriginAddress().equals(response.getDestinationAddress())) {
 			throw new IllegalArgumentException("Mismatched request origin address and response destination address");
 		}
-		if (!request.getDestinationAddress().getIp().equals(response.getOriginAddress().getIp())) {
+		if (!request.getDestinationAddress().equals(response.getOriginAddress())) {
 			throw new IllegalArgumentException("Mismatched response origin address and request destination address");
 		}
 	}
