@@ -8,7 +8,7 @@ import net.snapshot.ITrafficSnapshot;
  * @author Javier Verde
  *
  */
-public class PortCompatibleTransportPackage {
+public class PortCompatibleTransportPacket {
 
 	private String originPort;
 	private String destinationPort;
@@ -20,7 +20,7 @@ public class PortCompatibleTransportPackage {
 	 * @param destinationPort destination port
 	 * @param applicationLayerData remaining unprocessed application layer data
 	 */
-	public PortCompatibleTransportPackage(String originPort, String destinationPort, ITrafficSnapshot applicationLayerData) {
+	public PortCompatibleTransportPacket(String originPort, String destinationPort, ITrafficSnapshot applicationLayerData) {
 		super();
 		this.validateEntry(originPort, destinationPort, applicationLayerData);
 
@@ -89,7 +89,7 @@ public class PortCompatibleTransportPackage {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PortCompatibleTransportPackage other = (PortCompatibleTransportPackage) obj;
+		PortCompatibleTransportPacket other = (PortCompatibleTransportPacket) obj;
 		if (applicationLayerData == null) {
 			if (other.applicationLayerData != null)
 				return false;

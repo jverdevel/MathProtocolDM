@@ -1,23 +1,21 @@
 package net.protocols.transport.parser;
 
-import java.util.List;
-
 import net.protocols.exception.ParseSnapshotException;
-import net.protocols.transport.pack.PortCompatibleTransportPackage;
+import net.protocols.transport.pack.PortCompatibleTransportPacket;
 import net.snapshot.ITrafficSnapshot;
 
 /**
- * VV: Parser para un protocolo de transporte compatible con el concepto de puerto
+ * Parser for a port-compatible transport protocol
  * @author Javier Verde
  *
  */
 public interface IPortCompatibleTransportProtocolParser {
 	
 	/**
-	 * VV: Procesa el paquete contenido en un snapshot de trafico
+	 * Process packet data for a traffic snapshot
 	 * @param snapshot snapshot
-	 * @return paquete
+	 * @return packet packet data
 	 * @throws ParseSnapshotException
 	 */
-	public PortCompatibleTransportPackage processPackage(ITrafficSnapshot snapshot) throws ParseSnapshotException;
+	public PortCompatibleTransportPacket processPackage(ITrafficSnapshot snapshot) throws ParseSnapshotException;
 }

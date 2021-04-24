@@ -1,7 +1,7 @@
 package net.protocols.transport.stupidtxt.parser;
 
 import net.protocols.exception.ParseSnapshotException;
-import net.protocols.transport.pack.PortCompatibleTransportPackage;
+import net.protocols.transport.pack.PortCompatibleTransportPacket;
 import net.protocols.transport.parser.IPortCompatibleTransportProtocolParser;
 import net.snapshot.ITrafficSnapshot;
 
@@ -13,7 +13,7 @@ public class StupidTxtTransParser implements IPortCompatibleTransportProtocolPar
 	private static final String SEPARATOR = "#";
 	
 	@Override
-	public PortCompatibleTransportPackage processPackage(ITrafficSnapshot snapshot)
+	public PortCompatibleTransportPacket processPackage(ITrafficSnapshot snapshot)
 			throws ParseSnapshotException {
 		
 		if(snapshot.getLength()<MIN_PACKAGE_SIZE) {
@@ -45,7 +45,7 @@ public class StupidTxtTransParser implements IPortCompatibleTransportProtocolPar
 		int dataLength = Integer.valueOf(sb.toString());
 		
 		ITrafficSnapshot remains = snapshot.getSnapshotFragment(pointer+1, pointer+1+dataLength);		
-		return new PortCompatibleTransportPackage(portFrom, portTo, remains);		
+		return new PortCompatibleTransportPacket(portFrom, portTo, remains);		
 	}
 		
 	

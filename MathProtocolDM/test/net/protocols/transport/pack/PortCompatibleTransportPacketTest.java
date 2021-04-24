@@ -8,12 +8,12 @@ import net.snapshot.ITrafficSnapshot;
 import nl.jqno.equalsverifier.EqualsVerifier;
 
 
-public class PortCompatibleTransportPackageTest {
+public class PortCompatibleTransportPacketTest {
 	
 	@Test
 	public void checkCorrectPackage() {
 		ITrafficSnapshot snapshot = Mockito.mock(ITrafficSnapshot.class);
-		PortCompatibleTransportPackage pack = new PortCompatibleTransportPackage("a", "b", snapshot);
+		PortCompatibleTransportPacket pack = new PortCompatibleTransportPacket("a", "b", snapshot);
 		Assert.assertEquals("a", pack.getOriginPort());
 		Assert.assertEquals("b", pack.getDestinationPort());
 		Assert.assertEquals(snapshot, pack.getApplicationLayerData());
@@ -22,23 +22,23 @@ public class PortCompatibleTransportPackageTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void checkIncorrectPackageNullOrigin() {
 		ITrafficSnapshot snapshot = Mockito.mock(ITrafficSnapshot.class);
-		new PortCompatibleTransportPackage(null, "a", snapshot);
+		new PortCompatibleTransportPacket(null, "a", snapshot);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void checkIncorrectPackageNullDestination() {
 		ITrafficSnapshot snapshot = Mockito.mock(ITrafficSnapshot.class);
-		new PortCompatibleTransportPackage("a", null, snapshot);
+		new PortCompatibleTransportPacket("a", null, snapshot);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void checkIncorrectPackageNullData() {
-		new PortCompatibleTransportPackage("a", "b", null);
+		new PortCompatibleTransportPacket("a", "b", null);
 	}
 	
 	@Test
 	public void checkEquals() {
-	    EqualsVerifier.simple().forClass(PortCompatibleTransportPackage.class).verify();
+	    EqualsVerifier.simple().forClass(PortCompatibleTransportPacket.class).verify();
 	}
 	
 	

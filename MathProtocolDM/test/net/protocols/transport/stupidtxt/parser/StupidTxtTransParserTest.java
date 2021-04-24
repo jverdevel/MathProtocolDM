@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import net.protocols.exception.ParseSnapshotException;
-import net.protocols.transport.pack.PortCompatibleTransportPackage;
+import net.protocols.transport.pack.PortCompatibleTransportPacket;
 import net.snapshot.ITrafficSnapshot;
 import net.snapshot.ITrafficSnapshotTestUtil;
 
@@ -20,14 +20,14 @@ public class StupidTxtTransParserTest {
 	
 	@Test
 	public void checkValidPackage1() throws ParseSnapshotException {
-		PortCompatibleTransportPackage transportPackage = this.testTransportPackage(VALID_PACKAGE_1, 5, 18);
+		PortCompatibleTransportPacket transportPackage = this.testTransportPackage(VALID_PACKAGE_1, 5, 18);
 		Assert.assertEquals("u", transportPackage.getOriginPort());
 		Assert.assertEquals("i", transportPackage.getDestinationPort());		
 	}
 	
 	@Test
 	public void checkValidPackage2() throws ParseSnapshotException {
-		PortCompatibleTransportPackage transportPackage = this.testTransportPackage(VALID_PACKAGE_2, 4, 11);
+		PortCompatibleTransportPacket transportPackage = this.testTransportPackage(VALID_PACKAGE_2, 4, 11);
 		Assert.assertEquals("i", transportPackage.getOriginPort());
 		Assert.assertEquals("u", transportPackage.getDestinationPort());		
 	}
@@ -48,10 +48,10 @@ public class StupidTxtTransParserTest {
 	}
 	
 	
-	private PortCompatibleTransportPackage testTransportPackage(String text, int expectedStart, int expectedEnd) throws ParseSnapshotException {
+	private PortCompatibleTransportPacket testTransportPackage(String text, int expectedStart, int expectedEnd) throws ParseSnapshotException {
 		ITrafficSnapshot snapshot = ITrafficSnapshotTestUtil.createSnapshot(text);
 		StupidTxtTransParser parser = new StupidTxtTransParser();
-		PortCompatibleTransportPackage pack = parser.processPackage(snapshot);
+		PortCompatibleTransportPacket pack = parser.processPackage(snapshot);
 		Mockito.verify(snapshot).getSnapshotFragment(expectedStart, expectedEnd);
 		return pack;
 	}
