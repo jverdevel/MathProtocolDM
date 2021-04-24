@@ -78,6 +78,14 @@ public class ByteArrayBasedTrafficSnapshotTest {
 		String result = fragment.getString(0, 3);
 		Assert.assertEquals("his", result);
 	}
+	
+	@Test
+	public void fullSnapshortTest() {
+		ByteArrayBasedTrafficSnapshot snapshot = new ByteArrayBasedTrafficSnapshot(INITIAL_ARRAY);
+		ITrafficSnapshot fragment = snapshot.getSnapshotFragment(1, 4);
+		ITrafficSnapshot fullSnapshot = fragment.getFullSnapshot();
+		Assert.assertEquals(TEST_SNAPSHOT, fullSnapshot.getString(0, fullSnapshot.getLength()));
+	}
 
 	@Test
 	public void twoSnapshotFragmentCallstest() {

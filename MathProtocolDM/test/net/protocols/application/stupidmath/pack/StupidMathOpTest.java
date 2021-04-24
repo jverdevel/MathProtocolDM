@@ -1,9 +1,9 @@
-package net.processed;
+package net.protocols.application.stupidmath.pack;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import net.processed.StupidMathOp;
+import net.protocols.application.stupidmath.pack.StupidMathOp;
 import nl.jqno.equalsverifier.EqualsVerifier;
 
 public class StupidMathOpTest {

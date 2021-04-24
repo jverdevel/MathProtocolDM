@@ -115,6 +115,11 @@ public class ByteArrayBasedTrafficSnapshot implements ITrafficSnapshot {
 		this.checkValidIndexes(from, to);
 		return new ByteArrayBasedTrafficSnapshot(array, from + this.start, to + this.start);
 	}
+	
+	@Override
+	public ITrafficSnapshot getFullSnapshot() {
+		return new ByteArrayBasedTrafficSnapshot(array, 0, array.length/BYTES_PER_CHAR);
+	}
 
 	@Override
 	public int hashCode() {

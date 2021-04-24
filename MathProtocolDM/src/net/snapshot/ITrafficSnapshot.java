@@ -28,4 +28,10 @@ public interface ITrafficSnapshot {
 	 * @return end position (excluded) 
 	 */
 	public ITrafficSnapshot getSnapshotFragment(int from, int to);
+	
+	/**
+	 * VV: Gets the full snapshot. Implementation should NOT duplicate the data source under any circustances
+	 * @return snapshot
+	 */
+	public ITrafficSnapshot getFullSnapshot();
 }
