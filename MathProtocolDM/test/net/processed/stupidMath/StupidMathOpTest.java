@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import net.processed.application.stupidMath.StupidMathOp;
 import net.protocols.application.stupidmath.pack.StupidMathPacket;
 import nl.jqno.equalsverifier.EqualsVerifier;
 

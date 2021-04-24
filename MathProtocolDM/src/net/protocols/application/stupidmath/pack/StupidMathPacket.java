@@ -2,7 +2,7 @@ package net.protocols.application.stupidmath.pack;
 
 import java.util.Set;
 
-import net.processed.IProcessedApplicationPacket;
+import net.processed.application.IProcessedApplicationPacket;
 import net.protocols.application.IApplicationLayerPacket;
 
 /**

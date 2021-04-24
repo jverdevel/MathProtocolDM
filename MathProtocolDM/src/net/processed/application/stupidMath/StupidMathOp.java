@@ -1,6 +1,6 @@
-package net.processed.stupidMath;
+package net.processed.application.stupidMath;
 
-import net.processed.IProcessedApplicationPacket;
+import net.processed.application.IProcessedApplicationPacket;
 import net.protocols.application.stupidmath.pack.StupidMathPacket;
 
 public class StupidMathOp implements IProcessedApplicationPacket {

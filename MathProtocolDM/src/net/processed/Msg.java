@@ -2,6 +2,8 @@ package net.processed;
 
 import java.util.List;
 
+import net.processed.application.IProcessedApplicationPacket;
+
 /**
  * Processed message between two network elements, including address and port
  * 

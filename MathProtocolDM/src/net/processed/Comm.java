@@ -1,5 +1,7 @@
 package net.processed;
 
+import net.processed.application.IProcessedApplicationPacket;
+
 /**
  * 
  * Communication and reply between two network systems

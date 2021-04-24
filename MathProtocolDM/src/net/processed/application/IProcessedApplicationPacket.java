@@ -1,4 +1,4 @@
-package net.processed;
+package net.processed.application;
 
 /**
  * Processed values of a application packet
