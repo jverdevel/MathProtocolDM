@@ -1,4 +1,4 @@
-package net.protocols.application.stupidmath.op;
+package net.protocols.application.stupidmath.pack;
 
 import java.util.Set;
 
