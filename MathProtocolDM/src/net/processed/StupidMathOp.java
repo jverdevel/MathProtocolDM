@@ -1,15 +1,15 @@
-package net.protocols.application.stupidmath.pack;
+package net.processed;
 
 import java.util.Set;
 
 import net.protocols.application.DefaultApplicationLayerPacket;
 
 /**
- * Packet used by the StupidMath application layer
+ * Processed operation used by the StupidMath application layer
  * @author VV
  *
  */
-public class StupidMathOp extends DefaultApplicationLayerPacket{
+public class StupidMathOp implements IProcessedTransportPacket{
 
 	public static final int USE_PREVIOUS_OPERAND = -1;
 	public static final int EXPECTED_OPERAND_2_RESULT = 0;
