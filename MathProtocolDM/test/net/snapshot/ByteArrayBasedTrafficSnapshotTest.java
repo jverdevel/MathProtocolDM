@@ -95,6 +95,16 @@ public class ByteArrayBasedTrafficSnapshotTest {
 		String result = twoFragment.getString(0, twoFragment.getLength());
 		Assert.assertEquals("A", result);
 	}
+	
+	@Test
+	public void relativePositionCheckTest() {
+		ByteArrayBasedTrafficSnapshot snapshot = new ByteArrayBasedTrafficSnapshot(INITIAL_ARRAY);
+		int unmodifiedResult = snapshot.translateLocalPositionToCompletePosition(4);
+		ITrafficSnapshot fragment = snapshot.getSnapshotFragment(2, 7);
+		int modifiedResult = fragment.translateLocalPositionToCompletePosition(4);
+		Assert.assertEquals(4, unmodifiedResult);
+		Assert.assertEquals(6, modifiedResult);
+	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void invalidFragmentTestToLesserThanFrom() {

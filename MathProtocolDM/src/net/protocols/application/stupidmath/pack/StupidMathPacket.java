@@ -2,7 +2,7 @@ package net.protocols.application.stupidmath.pack;
 
 import java.util.Set;
 
-import net.processed.IProcessedTransportPacket;
+import net.processed.IProcessedApplicationPacket;
 import net.protocols.application.IApplicationLayerPacket;
 
 /**
@@ -10,7 +10,7 @@ import net.protocols.application.IApplicationLayerPacket;
  * @author VV
  *
  */
-public class StupidMathOp implements IProcessedTransportPacket, IApplicationLayerPacket{
+public class StupidMathPacket implements IApplicationLayerPacket{
 
 	public static final int USE_PREVIOUS_OPERAND = -1;
 	public static final int EXPECTED_OPERAND_2_RESULT = 0;
@@ -32,7 +32,7 @@ public class StupidMathOp implements IProcessedTransportPacket, IApplicationLaye
 	 * @param operand1 first operand. Use USE_PREVIOUS_OPERAND if packet tells to call previous operand
 	 * @param operand2 second operand. Use USE_PREVIOUS_OPERAND if packet tells to call previous operand, If the operation is result, this is always 0
 	 */
-	public StupidMathOp(String operation, int operand1, int operand2) {
+	public StupidMathPacket(String operation, int operand1, int operand2) {
 		super();
 	
 		this.validateInput(operation, operand1, operand2);
@@ -119,7 +119,7 @@ public class StupidMathOp implements IProcessedTransportPacket, IApplicationLaye
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		StupidMathOp other = (StupidMathOp) obj;
+		StupidMathPacket other = (StupidMathPacket) obj;
 		if (operand1 != other.operand1)
 			return false;
 		if (operand2 != other.operand2)

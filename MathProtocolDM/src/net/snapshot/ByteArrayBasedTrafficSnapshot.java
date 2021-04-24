@@ -120,6 +120,11 @@ public class ByteArrayBasedTrafficSnapshot implements ITrafficSnapshot {
 	public ITrafficSnapshot getFullSnapshot() {
 		return new ByteArrayBasedTrafficSnapshot(array, 0, array.length/BYTES_PER_CHAR);
 	}
+	
+	@Override
+	public int translateLocalPositionToCompletePosition(int relativePosition) {
+		return this.start + relativePosition;
+	}
 
 	@Override
 	public int hashCode() {

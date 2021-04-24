@@ -3,10 +3,10 @@ package net.protocols.application.stupidmath.pack;
 import org.junit.Assert;
 import org.junit.Test;
 
-import net.protocols.application.stupidmath.pack.StupidMathOp;
+import net.protocols.application.stupidmath.pack.StupidMathPacket;
 import nl.jqno.equalsverifier.EqualsVerifier;
 
-public class StupidMathOpTest {
+public class StupidMathPacketTest {
 	
 	@Test
 	public void checkValidConstructorSum() {
@@ -36,40 +36,40 @@ public class StupidMathOpTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void checkInvalidOperationConstruct() {
-		new StupidMathOp("#", 2, 3);
+		new StupidMathPacket("#", 2, 3);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void checkNullOperationConstruct() {
-		new StupidMathOp(null, 2, 3);
+		new StupidMathPacket(null, 2, 3);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void checkInvalidOperand1() {
-		new StupidMathOp("+", -4, 5);
+		new StupidMathPacket("+", -4, 5);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void checkInvalidOperand2() {
-		new StupidMathOp("+", 4, -5);
+		new StupidMathPacket("+", 4, -5);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void checkInValidEqualsOperand2() {
-		new StupidMathOp("=", 4, 5);
+		new StupidMathPacket("=", 4, 5);
 	}
 	
 	@Test
 	public void checkEquals() {
-	    EqualsVerifier.simple().forClass(StupidMathOp.class).verify();
+	    EqualsVerifier.simple().forClass(StupidMathPacket.class).verify();
 	}
 	
 	public void checkValidUsePreviousOperand() {
-		this.checkValidConstructor("+", StupidMathOp.USE_PREVIOUS_OPERAND, StupidMathOp.USE_PREVIOUS_OPERAND);
+		this.checkValidConstructor("+", StupidMathPacket.USE_PREVIOUS_OPERAND, StupidMathPacket.USE_PREVIOUS_OPERAND);
 	}
 	
 	private void checkValidConstructor(String operation, int operand1, int operand2) {
-		StupidMathOp op = new StupidMathOp(operation, operand1, operand2);
+		StupidMathPacket op = new StupidMathPacket(operation, operand1, operand2);
 		Assert.assertEquals(operation, op.getOperation());
 		Assert.assertEquals(operand1, op.getOperand1());
 		Assert.assertEquals(operand2, op.getOperand2());

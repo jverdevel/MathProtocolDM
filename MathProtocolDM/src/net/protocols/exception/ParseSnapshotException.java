@@ -13,15 +13,27 @@ public class ParseSnapshotException extends Exception {
 	
 	private ITrafficSnapshot snapshot;
 	private int position;
-
+	
 	/**
 	 * VV: Creates a parse exception
 	 * @param snapshot snapshot used
 	 * @param layer layer where the error happened
-	 * @param position position from total where error happened
+	 * @param position RELATIVE position where error happened
+	 * @param extraMsg extra information for debugging error. Can be null
 	 */
 	public ParseSnapshotException(ITrafficSnapshot snapshot, String layer, int position) {
-		super(composeMsg(layer, position));
+		this(snapshot, layer, position, null);
+	}
+	
+	/**
+	 * VV: Creates a parse exception
+	 * @param snapshot snapshot used
+	 * @param layer layer where the error happened
+	 * @param position RELATIVE position where error happened
+	 * @param extraMsg extra information for debugging error. Can be null
+	 */
+	public ParseSnapshotException(ITrafficSnapshot snapshot, String layer, int position, String extraMsg) {
+		super(composeMsg(layer, position, extraMsg));
 		this.snapshot = snapshot == null? null: snapshot.getFullSnapshot();	
 		this.position = position;
 	}
@@ -32,11 +44,15 @@ public class ParseSnapshotException extends Exception {
 	 * @param position position where it happened
 	 * @return message
 	 */
-	private static String composeMsg(String layer, int position) {
+	private static String composeMsg(String layer, int position, String extraMsg) {
 		StringBuilder sb = new StringBuilder("Parse error at layer ");
 		sb.append(layer);		 
 		sb.append(" Position: ");
 		sb.append(position);
+		if(extraMsg!=null) {
+			sb.append(" :");
+			sb.append(extraMsg);
+		}
 		return sb.toString();				
 	}
 

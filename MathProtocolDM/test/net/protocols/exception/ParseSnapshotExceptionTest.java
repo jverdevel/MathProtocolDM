@@ -32,5 +32,13 @@ public class ParseSnapshotExceptionTest {
 		ParseSnapshotException exception = new ParseSnapshotException(snapshot, "exampleLayer", 300);
 		Assert.assertEquals(fullSnapshot, exception.getSnapshot());
 	}
+	
+	@Test
+	public void checkExtraMsgTest() {
+		ITrafficSnapshot snapshot = Mockito.mock(ITrafficSnapshot.class);
+		ParseSnapshotException exception = new ParseSnapshotException(snapshot, "exampleLayer", 300, "extraMsg");
+		String msg = exception.getMessage();
+		Assert.assertTrue(msg.endsWith("extraMsg"));
+	}
 
 }

@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @param <T> type of packet
  */
-public class Msg<T extends IProcessedTransportPacket> {
+public class Msg<T extends IProcessedApplicationPacket> {
 	private AddressPort originAddress;
 	private AddressPort destinationAddress;
 	private List<T> transportProcessedPackets;

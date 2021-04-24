@@ -8,7 +8,7 @@ package net.processed;
  *
  * @param <T> Type of packet
  */
-public class Comm<T extends IProcessedTransportPacket> {
+public class Comm<T extends IProcessedApplicationPacket> {
 
 	private Msg<T> request;
 	private Msg<T> response;

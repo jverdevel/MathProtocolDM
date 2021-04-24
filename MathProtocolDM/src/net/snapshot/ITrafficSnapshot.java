@@ -30,8 +30,16 @@ public interface ITrafficSnapshot {
 	public ITrafficSnapshot getSnapshotFragment(int from, int to);
 	
 	/**
-	 * VV: Gets the full snapshot. Implementation should NOT duplicate the data source under any circustances
+	 * Gets the full snapshot. Implementation should NOT duplicate the data source under any circustances
 	 * @return snapshot
 	 */
 	public ITrafficSnapshot getFullSnapshot();
+
+	/**
+	 * Obtains the position related to the full snapshot from the relative position
+	 * @param relativePosition relative position 
+	 * @return absolute position 
+	 */ 
+	public int translateLocalPositionToCompletePosition(int relativePosition);
 }
+
