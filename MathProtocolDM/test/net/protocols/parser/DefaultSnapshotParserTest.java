@@ -27,7 +27,7 @@ public class DefaultSnapshotParserTest {
 	}
 	
 	
-	private DefaultSnapshotParser getParserToTest() {
-		return Mockito.mock(DefaultSnapshotParser.class, Mockito.CALLS_REAL_METHODS);
+	private DefaultSnapshotTxtBasedParser getParserToTest() {
+		return Mockito.mock(DefaultSnapshotTxtBasedParser.class, Mockito.CALLS_REAL_METHODS);
 	}
 }
