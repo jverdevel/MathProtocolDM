@@ -1,10 +1,12 @@
 package net.processed;
 
 /**
- * Communication and reply between two network systems
  * 
+ * Communication and reply between two network systems
+
  * @author Javier Verde
  *
+ * @param <T> Type of packet
  */
 public class Comm<T extends IProcessedTransportPacket> {
 
