@@ -113,8 +113,8 @@ public class ByteArrayBasedTrafficSnapshotTest {
 		snapshot.getSnapshotFragment(2, 1);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void invalidFragmentTestToEqualThanFrom() {
+	@Test
+	public void validFragmentTestToEqualThanFrom() {
 		ByteArrayBasedTrafficSnapshot snapshot = new ByteArrayBasedTrafficSnapshot(INITIAL_ARRAY);
 		snapshot.getSnapshotFragment(1, 1);
 	}

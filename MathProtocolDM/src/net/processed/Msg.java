@@ -14,22 +14,22 @@ import net.processed.application.IProcessedApplicationPacket;
 public class Msg<T extends IProcessedApplicationPacket> {
 	private AddressPort originAddress;
 	private AddressPort destinationAddress;
-	private List<T> transportProcessedPackets;
+	private List<T> applicationProcessedPackets;
 
 	/**
 	 * Creates message
 	 * 
 	 * @param originAddress             address message was sent from
 	 * @param destinationAddress        address message was sent to
-	 * @param transportProcessedPackets list of containted packets
+	 * @param applicationProcessedPackets list of contained packets
 	 */
-	public Msg(AddressPort originAddress, AddressPort destinationAddress, List<T> transportProcessedPackets) {
+	public Msg(AddressPort originAddress, AddressPort destinationAddress, List<T> applicationProcessedPackets) {
 		super();
-		this.validateInput(originAddress, destinationAddress, transportProcessedPackets);
+		this.validateInput(originAddress, destinationAddress, applicationProcessedPackets);
 
 		this.originAddress = originAddress;
 		this.destinationAddress = destinationAddress;
-		this.transportProcessedPackets = transportProcessedPackets;
+		this.applicationProcessedPackets = applicationProcessedPackets;
 	}
 
 	/**
@@ -37,15 +37,15 @@ public class Msg<T extends IProcessedApplicationPacket> {
 	 * 
 	 * @param originAddress             address message was sent from
 	 * @param destinationAddress        address message was sent to
-	 * @param transportProcessedPackets list of containted packets
+	 * @param applicationProcessedPackets list of containted packets
 	 */
 	private void validateInput(AddressPort originAddress, AddressPort destinationAddress,
-			List<T> transportProcessedPackets) {
+			List<T> applicationProcessedPackets) {
 
 		if (originAddress == null || destinationAddress == null) {
 			throw new IllegalArgumentException("Addresses cannot be null");
 		}
-		if (transportProcessedPackets == null) {
+		if (applicationProcessedPackets == null) {
 			throw new IllegalArgumentException("Transport packete list cannot be null");
 		}
 	}
@@ -73,8 +73,8 @@ public class Msg<T extends IProcessedApplicationPacket> {
 	 * 
 	 * @return list of packets
 	 */
-	public List<T> getTransportProcessedPackets() {
-		return transportProcessedPackets;
+	public List<T> getApplicationProcessedPackets() {
+		return applicationProcessedPackets;
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class Msg<T extends IProcessedApplicationPacket> {
 		int result = 1;
 		result = prime * result + ((destinationAddress == null) ? 0 : destinationAddress.hashCode());
 		result = prime * result + ((originAddress == null) ? 0 : originAddress.hashCode());
-		result = prime * result + ((transportProcessedPackets == null) ? 0 : transportProcessedPackets.hashCode());
+		result = prime * result + ((applicationProcessedPackets == null) ? 0 : applicationProcessedPackets.hashCode());
 		return result;
 	}
 
@@ -106,10 +106,10 @@ public class Msg<T extends IProcessedApplicationPacket> {
 				return false;
 		} else if (!originAddress.equals(other.originAddress))
 			return false;
-		if (transportProcessedPackets == null) {
-			if (other.transportProcessedPackets != null)
+		if (applicationProcessedPackets == null) {
+			if (other.applicationProcessedPackets != null)
 				return false;
-		} else if (!transportProcessedPackets.equals(other.transportProcessedPackets))
+		} else if (!applicationProcessedPackets.equals(other.applicationProcessedPackets))
 			return false;
 		return true;
 	}
@@ -117,7 +117,7 @@ public class Msg<T extends IProcessedApplicationPacket> {
 	@Override
 	public String toString() {
 		return "Msg [originAddress=" + originAddress + ", destinationAddress=" + destinationAddress
-				+ ", transportProcessedPackets=" + transportProcessedPackets + "]";
+				+ ", transportProcessedPackets=" + applicationProcessedPackets + "]";
 	}
 
 }

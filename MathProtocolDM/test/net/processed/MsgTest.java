@@ -17,7 +17,7 @@ public class MsgTest {
 		Msg msg = new Msg<>(origin, destination, list);
 		Assert.assertEquals(origin, msg.getOriginAddress());
 		Assert.assertEquals(destination, msg.getDestinationAddress());
-		Assert.assertEquals(list, msg.getTransportProcessedPackets());
+		Assert.assertEquals(list, msg.getApplicationProcessedPackets());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)

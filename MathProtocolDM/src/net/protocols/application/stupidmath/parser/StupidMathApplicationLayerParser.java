@@ -24,8 +24,8 @@ public class StupidMathApplicationLayerParser extends DefaultApplicationLayerPar
 
 	private static final String EXPRESSION_CLOSING_BRACKET = "\\]";
 	private static final String EXPRESSION_HASH = "#";
-	private static final String USE_PREVIOUS_OPERAND = "*";
-	private static final String EXPECTED_SECOND_RESULT = "-";
+	public static final String USE_PREVIOUS_OPERAND = "*";
+	public static final String EXPECTED_SECOND_RESULT = "-";
 
 	private Pattern patternClosingBracket;
 
