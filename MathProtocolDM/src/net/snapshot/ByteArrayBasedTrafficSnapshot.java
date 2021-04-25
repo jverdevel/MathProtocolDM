@@ -1,9 +1,7 @@
 package net.snapshot;
 
-import java.nio.charset.Charset;
 import java.util.Arrays;
 
-//TODO: depending on codification answer, this might require a bit of a change. 
 /**
  * VV: Traffic snapshot based on a byte array. Assumes default codification
  * 
@@ -19,7 +17,7 @@ public class ByteArrayBasedTrafficSnapshot implements ITrafficSnapshot {
 
 	private static final int BYTES_PER_CHAR = 1;
 
-	private static final String CODIFICATION = "ISO-8859-1";
+	public static final String CODIFICATION = "ISO-8859-1";
 
 	/**
 	 * Creates a traffic snapshot backed by a byte array

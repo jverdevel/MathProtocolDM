@@ -19,6 +19,7 @@ import net.protocols.network.parser.IIpBasedNetworkProtocolParser;
 import net.protocols.transport.pack.PortCompatibleTransportPacket;
 import net.protocols.transport.parser.IPortCompatibleTransportProtocolParser;
 import net.snapshot.ByteArrayBasedTrafficSnapshot;
+import net.snapshot.ISnapshotGenerator;
 import net.snapshot.ITrafficSnapshot;
 
 /**
@@ -33,6 +34,7 @@ public class NetworkTrafficParser<T extends IProcessedApplicationPacket> {
 	private IIpBasedNetworkProtocolParser networkParser;
 	private IPortCompatibleTransportProtocolParser transportParser;
 	private IProcessedApplicationParser<T> applicationParser;
+	private ISnapshotGenerator snapshotGenerator;
 
 	private static final String NETWORK_LAYER = "network";
 
@@ -42,15 +44,18 @@ public class NetworkTrafficParser<T extends IProcessedApplicationPacket> {
 	 * @param networkParser     network-layer packet parser
 	 * @param transportParser   transport-layer packet parser
 	 * @param applicationParser application-layer processed parser
+	 * @param snapshotGenerator generator for snapshots
 	 */
 	public NetworkTrafficParser(IIpBasedNetworkProtocolParser networkParser,
-			IPortCompatibleTransportProtocolParser transportParser, IProcessedApplicationParser<T> applicationParser) {
+			IPortCompatibleTransportProtocolParser transportParser, IProcessedApplicationParser<T> applicationParser,
+			ISnapshotGenerator snapshotGenerator) {
 		super();
-		this.validateInput(networkParser, transportParser, applicationParser);
+		this.validateInput(networkParser, transportParser, applicationParser, snapshotGenerator);
 
 		this.networkParser = networkParser;
 		this.transportParser = transportParser;
 		this.applicationParser = applicationParser;
+		this.snapshotGenerator = snapshotGenerator;
 	}
 
 	/**
@@ -59,9 +64,11 @@ public class NetworkTrafficParser<T extends IProcessedApplicationPacket> {
 	 * @param networkParser     network-layer packet parser
 	 * @param transportParser   transport-layer packet parser
 	 * @param applicationParser application-layer processed parser
+	 * @param snapshotGenerator generator for snapshots
 	 */
 	private void validateInput(IIpBasedNetworkProtocolParser networkParser,
-			IPortCompatibleTransportProtocolParser transportParser, IProcessedApplicationParser<T> applicationParser) {
+			IPortCompatibleTransportProtocolParser transportParser, IProcessedApplicationParser<T> applicationParser,
+			ISnapshotGenerator snapshotGenerator) {
 		if (networkParser == null) {
 			throw new IllegalArgumentException("Network parser cannot be null");
 		}
@@ -70,6 +77,9 @@ public class NetworkTrafficParser<T extends IProcessedApplicationPacket> {
 		}
 		if (applicationParser == null) {
 			throw new IllegalArgumentException("Application parser cannot be null");
+		}
+		if (snapshotGenerator == null) {
+			throw new IllegalArgumentException("Snapshot generator cannot be null");
 		}
 	}
 
@@ -103,8 +113,7 @@ public class NetworkTrafficParser<T extends IProcessedApplicationPacket> {
 	 * @return snapshot
 	 */
 	protected ITrafficSnapshot getSnapshot(byte[] raw) {
-		// TODO: add failsafe in case ISO is not working
-		return new ByteArrayBasedTrafficSnapshot(raw);
+		return this.snapshotGenerator.getSnapshot(raw);
 	}
 
 	/**
@@ -115,15 +124,7 @@ public class NetworkTrafficParser<T extends IProcessedApplicationPacket> {
 	 * @throws ParseSnapshotException
 	 */
 	private List<IpBasedNetworkPacket> parseNetworkPackets(ITrafficSnapshot snapshot) throws ParseSnapshotException {
-		ITrafficSnapshot currentSnapshot = snapshot;
-		List<IpBasedNetworkPacket> networkPackages = new ArrayList<>();
-		while (currentSnapshot.getLength() != 0) {
-			IpBasedNetworkPacket newPackage = networkParser.processPackage(currentSnapshot);
-			networkPackages.add(newPackage);
-			currentSnapshot = currentSnapshot.getSnapshotFragment(newPackage.getTotalLength(),
-					currentSnapshot.getLength());
-		}
-		return networkPackages;
+		return this.networkParser.processPackages(snapshot);
 	}
 
 	/**

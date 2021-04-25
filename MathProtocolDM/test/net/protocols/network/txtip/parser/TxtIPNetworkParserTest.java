@@ -1,8 +1,14 @@
 package net.protocols.network.txtip.parser;
 
+import static org.mockito.Mockito.spy;
+
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import net.protocols.exception.ParseSnapshotException;
 import net.protocols.network.pack.IpBasedNetworkPacket;
@@ -32,6 +38,26 @@ public class TxtIPNetworkParserTest {
 		Assert.assertEquals("XYZ", networkPackage.getOriginIp());
 		Assert.assertEquals("ABC", networkPackage.getDestinationIp());
 		Assert.assertEquals(VALID_PACKAGE_2.length(), networkPackage.getTotalLength());
+	}
+
+	@Test
+	public void checkMultiProcessing() throws ParseSnapshotException {
+		ITrafficSnapshot firstSnapshot = Mockito.mock(ITrafficSnapshot.class);
+		Mockito.when(firstSnapshot.getLength()).thenReturn(1);
+		ITrafficSnapshot secondSnapshot = Mockito.mock(ITrafficSnapshot.class);
+		Mockito.when(secondSnapshot.getLength()).thenReturn(1);
+		ITrafficSnapshot lastSnapshot = Mockito.mock(ITrafficSnapshot.class);
+		Mockito.when(lastSnapshot.getLength()).thenReturn(0);
+		Mockito.when(firstSnapshot.getSnapshotFragment(Mockito.anyInt(), Mockito.anyInt())).thenReturn(secondSnapshot);
+		Mockito.when(secondSnapshot.getSnapshotFragment(Mockito.anyInt(), Mockito.anyInt())).thenReturn(lastSnapshot);
+
+		IpBasedNetworkPacket mockedPacket = Mockito.mock(IpBasedNetworkPacket.class);
+		TxtIPNetworkParser spyParser = Mockito.mock(TxtIPNetworkParser.class);
+		Mockito.when(spyParser.processPackage(Mockito.any())).thenReturn(mockedPacket);
+		Mockito.when(spyParser.processPackages(firstSnapshot)).thenCallRealMethod();
+
+		List<IpBasedNetworkPacket> packages = spyParser.processPackages(firstSnapshot);
+		Assert.assertEquals(2, packages.size());
 	}
 
 	@Test(expected = ParseSnapshotException.class)

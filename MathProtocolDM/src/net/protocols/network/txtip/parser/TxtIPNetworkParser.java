@@ -1,5 +1,8 @@
 package net.protocols.network.txtip.parser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.protocols.exception.ParseSnapshotException;
 import net.protocols.network.pack.IpBasedNetworkPacket;
 import net.protocols.network.parser.IIpBasedNetworkProtocolParser;
@@ -38,6 +41,19 @@ public class TxtIPNetworkParser extends DefaultSnapshotTxtBasedParser implements
 		int endRemains = dataLength.getStart() + dataLength.getLength();
 		ITrafficSnapshot remains = snapshot.getSnapshotFragment(dataLength.getStart(), endRemains);
 		return new IpBasedNetworkPacket(ipFrom, ipTo, remains, endRemains);
+	}
+
+	@Override
+	public List<IpBasedNetworkPacket> processPackages(ITrafficSnapshot snapshot) throws ParseSnapshotException {
+		ITrafficSnapshot currentSnapshot = snapshot;
+		List<IpBasedNetworkPacket> networkPackages = new ArrayList<>();
+		while (currentSnapshot.getLength() != 0) {
+			IpBasedNetworkPacket newPackage = this.processPackage(currentSnapshot);
+			networkPackages.add(newPackage);
+			currentSnapshot = currentSnapshot.getSnapshotFragment(newPackage.getTotalLength(),
+					currentSnapshot.getLength());
+		}
+		return networkPackages;
 	}
 
 }
