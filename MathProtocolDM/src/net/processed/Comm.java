@@ -5,7 +5,7 @@ import net.processed.application.IProcessedApplicationPacket;
 /**
  * 
  * Communication and reply between two network systems
-
+ * 
  * @author Javier Verde
  *
  * @param <T> Type of packet
@@ -88,6 +88,11 @@ public class Comm<T extends IProcessedApplicationPacket> {
 		} else if (!response.equals(other.response))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Comm [request=" + request + ", response=" + response + "]";
 	}
 
 }

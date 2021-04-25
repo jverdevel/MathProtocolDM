@@ -89,4 +89,9 @@ public class AddressPort {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "AddressPort [ip=" + ip + ", port=" + port + "]";
+	}
+
 }

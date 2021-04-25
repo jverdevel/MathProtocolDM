@@ -113,7 +113,11 @@ public class Msg<T extends IProcessedApplicationPacket> {
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Msg [originAddress=" + originAddress + ", destinationAddress=" + destinationAddress
+				+ ", transportProcessedPackets=" + transportProcessedPackets + "]";
+	}
 
 }

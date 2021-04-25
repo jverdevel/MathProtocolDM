@@ -7,7 +7,7 @@ import net.snapshot.ITrafficSnapshot;
  * @author Javier Verde
  *
  */
-public class ParseSnapshotException extends Exception {
+public class ParseSnapshotException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	

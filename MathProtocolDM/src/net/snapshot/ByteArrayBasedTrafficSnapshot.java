@@ -60,7 +60,7 @@ public class ByteArrayBasedTrafficSnapshot implements ITrafficSnapshot {
 		if (array.length % BYTES_PER_CHAR != 0) {
 			throw new IllegalArgumentException("Array doesn't contain pairs of bytes");
 		}
-		if (start >= end) {
+		if (start > end) {
 			throw new IllegalArgumentException("end must be greater than start");
 		}
 		if (end * BYTES_PER_CHAR > array.length) {
@@ -97,7 +97,7 @@ public class ByteArrayBasedTrafficSnapshot implements ITrafficSnapshot {
 	 * @param to   last character considered part of the array
 	 */
 	private void checkValidIndexes(int from, int to) {
-		if (from >= to) {
+		if (from > to) {
 			throw new IllegalArgumentException("to must be greater than from");
 		}
 		if (from < 0) {

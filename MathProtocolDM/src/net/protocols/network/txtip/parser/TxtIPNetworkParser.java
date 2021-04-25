@@ -1,7 +1,7 @@
 package net.protocols.network.txtip.parser;
 
 import net.protocols.exception.ParseSnapshotException;
-import net.protocols.network.pack.IpBasedNetworkPackage;
+import net.protocols.network.pack.IpBasedNetworkPacket;
 import net.protocols.network.parser.IIpBasedNetworkProtocolParser;
 import net.protocols.parser.DefaultSnapshotTxtBasedParser;
 import net.snapshot.ITrafficSnapshot;
@@ -19,7 +19,7 @@ public class TxtIPNetworkParser extends DefaultSnapshotTxtBasedParser implements
 	public static final int MIN_LENGTH = CHARACTERS_PER_IP*2+1;
 	
 	@Override
-	public IpBasedNetworkPackage processPackage(ITrafficSnapshot snapshot) throws ParseSnapshotException {
+	public IpBasedNetworkPacket processPackage(ITrafficSnapshot snapshot) throws ParseSnapshotException {
 		if(snapshot.getLength()<MIN_LENGTH) {
 			throw new ParseSnapshotException(snapshot, NAME_NETWORK_LAYER, 0, "network package is too short");
 		}
@@ -31,8 +31,9 @@ public class TxtIPNetworkParser extends DefaultSnapshotTxtBasedParser implements
 		int pointer = CHARACTERS_PER_IP*2;
 		ProcessedLength dataLength = this.processLength(snapshot, pointer, NAME_NETWORK_LAYER);
 		
-		ITrafficSnapshot remains = snapshot.getSnapshotFragment(dataLength.getStart(), dataLength.getStart()+dataLength.getLength());		
-		return new IpBasedNetworkPackage(ipFrom, ipTo, remains);	
+		int endRemains = dataLength.getStart()+dataLength.getLength();
+		ITrafficSnapshot remains = snapshot.getSnapshotFragment(dataLength.getStart(), endRemains);		
+		return new IpBasedNetworkPacket(ipFrom, ipTo, remains, endRemains);	
 	}
 
 }

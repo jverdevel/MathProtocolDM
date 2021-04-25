@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import net.protocols.exception.ParseSnapshotException;
-import net.protocols.network.pack.IpBasedNetworkPackage;
+import net.protocols.network.pack.IpBasedNetworkPacket;
 import net.snapshot.ITrafficSnapshot;
 import net.snapshot.ITrafficSnapshotTestUtil;
 
@@ -20,16 +20,18 @@ public class TxtIPNetworkParserTest {
 	
 	@Test
 	public void checkValidPackage1() throws ParseSnapshotException {
-		IpBasedNetworkPackage networkPackage = this.testNetworkPackage(VALID_PACKAGE_1, 9, 27);
+		IpBasedNetworkPacket networkPackage = this.testNetworkPackage(VALID_PACKAGE_1, 9, 27);
 		Assert.assertEquals("ABC", networkPackage.getOriginIp());
-		Assert.assertEquals("XYZ", networkPackage.getDestinationIp());		
+		Assert.assertEquals("XYZ", networkPackage.getDestinationIp());	
+		Assert.assertEquals(VALID_PACKAGE_1.length(), networkPackage.getTotalLength());
 	}
 	
 	@Test
 	public void checkValidPackage2() throws ParseSnapshotException {
-		IpBasedNetworkPackage networkPackage = this.testNetworkPackage(VALID_PACKAGE_2, 9, 20);
+		IpBasedNetworkPacket networkPackage = this.testNetworkPackage(VALID_PACKAGE_2, 9, 20);
 		Assert.assertEquals("XYZ", networkPackage.getOriginIp());
 		Assert.assertEquals("ABC", networkPackage.getDestinationIp());		
+		Assert.assertEquals(VALID_PACKAGE_2.length(), networkPackage.getTotalLength());
 	}
 	
 	@Test(expected = ParseSnapshotException.class)
@@ -47,10 +49,10 @@ public class TxtIPNetworkParserTest {
 		this.testNetworkPackage(INVALID_PACKAGE_NO_HASH, 0, 2);
 	}
 	
-	private IpBasedNetworkPackage testNetworkPackage(String text, int expectedStart, int expectedEnd) throws ParseSnapshotException {
+	private IpBasedNetworkPacket testNetworkPackage(String text, int expectedStart, int expectedEnd) throws ParseSnapshotException {
 		ITrafficSnapshot snapshot = ITrafficSnapshotTestUtil.createSnapshot(text);
 		TxtIPNetworkParser parser = new TxtIPNetworkParser();
-		IpBasedNetworkPackage pack = parser.processPackage(snapshot);
+		IpBasedNetworkPacket pack = parser.processPackage(snapshot);
 		Mockito.verify(snapshot).getSnapshotFragment(expectedStart, expectedEnd);
 		return pack;
 	}

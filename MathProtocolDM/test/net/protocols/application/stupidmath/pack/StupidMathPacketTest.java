@@ -33,7 +33,6 @@ public class StupidMathPacketTest {
 		this.checkValidConstructor("=", 3, 0);
 	}
 	
-	
 	@Test(expected = IllegalArgumentException.class)
 	public void checkInvalidOperationConstruct() {
 		new StupidMathPacket("#", 2, 3);

@@ -1,7 +1,7 @@
 package net.protocols.network.parser;
 
 import net.protocols.exception.ParseSnapshotException;
-import net.protocols.network.pack.IpBasedNetworkPackage;
+import net.protocols.network.pack.IpBasedNetworkPacket;
 import net.snapshot.ITrafficSnapshot;
 
 /**
@@ -17,5 +17,5 @@ public interface IIpBasedNetworkProtocolParser {
 	 * @return packet packet data
 	 * @throws ParseSnapshotException
 	 */
-	public IpBasedNetworkPackage processPackage(ITrafficSnapshot snapshot) throws ParseSnapshotException;
+	public IpBasedNetworkPacket processPackage(ITrafficSnapshot snapshot) throws ParseSnapshotException;
 }

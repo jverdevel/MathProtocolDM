@@ -53,10 +53,11 @@ public class ByteArrayBasedTrafficSnapshotTest {
 		snapshot.getString(2, 1);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void invalidStringTestToEqualThanFrom() {
+	@Test
+	public void validStringTestToEqualThanFrom() {
 		ByteArrayBasedTrafficSnapshot snapshot = new ByteArrayBasedTrafficSnapshot(INITIAL_ARRAY);
-		snapshot.getString(1, 1);
+		String string = snapshot.getString(1, 1);
+		Assert.assertEquals("", string);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
