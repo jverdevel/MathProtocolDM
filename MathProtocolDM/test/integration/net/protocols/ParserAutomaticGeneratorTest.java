@@ -40,7 +40,7 @@ public abstract class ParserAutomaticGeneratorTest<T extends IProcessedApplicati
 	 *                 each) generated
 	 */
 	protected final void doTest(long seed, int numComms) {
-		SnapshotAndExpectedComms testCase = this.generateTestCase(seed, numComms);
+		SnapshotAndExpectedComms<T> testCase = this.generateTestCase(seed, numComms);
 		NetworkTrafficStupidMathParserProvider provider = new NetworkTrafficStupidMathParserProvider();
 		List<Comm<StupidMathOp>> result = provider.getParser().crunch(testCase.getSnapshot().getBytes());
 
@@ -98,7 +98,7 @@ public abstract class ParserAutomaticGeneratorTest<T extends IProcessedApplicati
 	 *                 each)
 	 * @return test case
 	 */
-	private SnapshotAndExpectedComms generateTestCase(long seed, int numComms) {
+	private SnapshotAndExpectedComms<T> generateTestCase(long seed, int numComms) {
 		// VV: gotta have a reproductible case here
 		Random random = new Random(seed);
 		List<Comm<T>> comms = IntStream.range(0, numComms).sequential().mapToObj(i -> this.autogenerateComm(random))
@@ -114,7 +114,7 @@ public abstract class ParserAutomaticGeneratorTest<T extends IProcessedApplicati
 	 * @param random randomness generator
 	 * @return snapshot
 	 */
-	private SnapshotAndExpectedComms generateTestCase(List<Comm<T>> comms, Random random) {
+	private SnapshotAndExpectedComms<T> generateTestCase(List<Comm<T>> comms, Random random) {
 		Queue<Comm<T>> unprocessedComms = new LinkedList<>(comms);
 		Queue<Comm<T>> halfProcessedComms = new LinkedList<>();
 		List<Comm<T>> processedComms = new ArrayList<>();
@@ -138,7 +138,7 @@ public abstract class ParserAutomaticGeneratorTest<T extends IProcessedApplicati
 			}
 		}
 
-		return new SnapshotAndExpectedComms(snapshot.toString(), processedComms);
+		return new SnapshotAndExpectedComms<>(snapshot.toString(), processedComms);
 	}
 
 	/**
