@@ -8,6 +8,7 @@ import net.snapshot.ITrafficSnapshot;
 
 /**
  * VV: Parser for processed packages in the application layer level
+ * 
  * @author Javier Verde
  * 
  * @param <T> type of packet
@@ -17,6 +18,7 @@ public interface IProcessedApplicationParser<T extends IProcessedApplicationPack
 
 	/**
 	 * VV: Parses the processed packets from a snapshot
+	 * 
 	 * @param snapshot snapshot.
 	 * @return list of packets
 	 * @throws ParseSnapshotException

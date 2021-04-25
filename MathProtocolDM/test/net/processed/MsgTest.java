@@ -19,31 +19,31 @@ public class MsgTest {
 		Assert.assertEquals(destination, msg.getDestinationAddress());
 		Assert.assertEquals(list, msg.getApplicationProcessedPackets());
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void invalidOriginTest() {
 		AddressPort destination = Mockito.mock(AddressPort.class);
 		List list = Mockito.mock(List.class);
 		new Msg<>(null, destination, list);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void invalidDestinationTest() {
 		AddressPort origin = Mockito.mock(AddressPort.class);
 		List list = Mockito.mock(List.class);
 		new Msg<>(origin, null, list);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void invalidListTest() {
 		AddressPort origin = Mockito.mock(AddressPort.class);
 		AddressPort destination = Mockito.mock(AddressPort.class);
 		new Msg<>(origin, destination, null);
 	}
-	
+
 	@Test
 	public void checkEquals() {
-	    EqualsVerifier.simple().forClass(Msg.class).verify();
+		EqualsVerifier.simple().forClass(Msg.class).verify();
 	}
 
 }

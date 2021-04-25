@@ -2,6 +2,7 @@ package test;
 
 /**
  * Marks an integration test
+ * 
  * @author Javier Verde
  *
  */

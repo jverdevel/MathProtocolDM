@@ -19,8 +19,8 @@ public class Msg<T extends IProcessedApplicationPacket> {
 	/**
 	 * Creates message
 	 * 
-	 * @param originAddress             address message was sent from
-	 * @param destinationAddress        address message was sent to
+	 * @param originAddress               address message was sent from
+	 * @param destinationAddress          address message was sent to
 	 * @param applicationProcessedPackets list of contained packets
 	 */
 	public Msg(AddressPort originAddress, AddressPort destinationAddress, List<T> applicationProcessedPackets) {
@@ -35,8 +35,8 @@ public class Msg<T extends IProcessedApplicationPacket> {
 	/**
 	 * Validates the input, throws exception if not correct
 	 * 
-	 * @param originAddress             address message was sent from
-	 * @param destinationAddress        address message was sent to
+	 * @param originAddress               address message was sent from
+	 * @param destinationAddress          address message was sent to
 	 * @param applicationProcessedPackets list of containted packets
 	 */
 	private void validateInput(AddressPort originAddress, AddressPort destinationAddress,

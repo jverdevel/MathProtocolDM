@@ -9,12 +9,14 @@ import net.protocols.transport.stupidtxt.parser.StupidTxtTransParser;
 
 /**
  * Class that provides a working Stupid-Math full parser
+ * 
  * @author Javier Verde
  *
  */
 public class NetworkTrafficStupidMathParserProvider {
-	
-	public NetworkTrafficParser<StupidMathOp> getParser(){		
-		return new NetworkTrafficParser<>(new TxtIPNetworkParser(), new StupidTxtTransParser(), new StupidMathOpParser(new StupidMathApplicationLayerParser()));
+
+	public NetworkTrafficParser<StupidMathOp> getParser() {
+		return new NetworkTrafficParser<>(new TxtIPNetworkParser(), new StupidTxtTransParser(),
+				new StupidMathOpParser(new StupidMathApplicationLayerParser()));
 	}
 }

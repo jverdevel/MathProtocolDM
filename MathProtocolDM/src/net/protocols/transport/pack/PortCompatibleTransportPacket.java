@@ -16,11 +16,13 @@ public class PortCompatibleTransportPacket {
 
 	/**
 	 * Created package data
-	 * @param originPort origin port
-	 * @param destinationPort destination port
+	 * 
+	 * @param originPort           origin port
+	 * @param destinationPort      destination port
 	 * @param applicationLayerData remaining unprocessed application layer data
 	 */
-	public PortCompatibleTransportPacket(String originPort, String destinationPort, ITrafficSnapshot applicationLayerData) {
+	public PortCompatibleTransportPacket(String originPort, String destinationPort,
+			ITrafficSnapshot applicationLayerData) {
 		super();
 		this.validateEntry(originPort, destinationPort, applicationLayerData);
 
@@ -31,8 +33,9 @@ public class PortCompatibleTransportPacket {
 
 	/**
 	 * Validates entry data
-	 * @param originPort origin port
-	 * @param destinationPort destination port
+	 * 
+	 * @param originPort           origin port
+	 * @param destinationPort      destination port
 	 * @param applicationLayerData remaining unprocessed application layer data
 	 */
 	private void validateEntry(String originPort, String destinationPort, ITrafficSnapshot applicationLayerData) {
@@ -42,13 +45,14 @@ public class PortCompatibleTransportPacket {
 		if (destinationPort == null) {
 			throw new IllegalArgumentException("Destination port cannot be null");
 		}
-		if(applicationLayerData==null) {
+		if (applicationLayerData == null) {
 			throw new IllegalArgumentException("Application layer data cannot be null");
 		}
 	}
 
 	/**
 	 * Gets the origin port
+	 * 
 	 * @return origin port
 	 */
 	public String getOriginPort() {
@@ -57,6 +61,7 @@ public class PortCompatibleTransportPacket {
 
 	/**
 	 * Gets the destination port
+	 * 
 	 * @return destination port
 	 */
 	public String getDestinationPort() {
@@ -65,6 +70,7 @@ public class PortCompatibleTransportPacket {
 
 	/**
 	 * Gets the remaining application layer data
+	 * 
 	 * @return application layer data
 	 */
 	public ITrafficSnapshot getApplicationLayerData() {
@@ -108,5 +114,4 @@ public class PortCompatibleTransportPacket {
 		return true;
 	}
 
-	
 }

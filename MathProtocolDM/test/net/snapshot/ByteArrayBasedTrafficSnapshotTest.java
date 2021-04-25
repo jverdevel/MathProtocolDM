@@ -79,7 +79,7 @@ public class ByteArrayBasedTrafficSnapshotTest {
 		String result = fragment.getString(0, 3);
 		Assert.assertEquals("his", result);
 	}
-	
+
 	@Test
 	public void fullSnapshortTest() {
 		ByteArrayBasedTrafficSnapshot snapshot = new ByteArrayBasedTrafficSnapshot(INITIAL_ARRAY);
@@ -96,7 +96,7 @@ public class ByteArrayBasedTrafficSnapshotTest {
 		String result = twoFragment.getString(0, twoFragment.getLength());
 		Assert.assertEquals("A", result);
 	}
-	
+
 	@Test
 	public void relativePositionCheckTest() {
 		ByteArrayBasedTrafficSnapshot snapshot = new ByteArrayBasedTrafficSnapshot(INITIAL_ARRAY);

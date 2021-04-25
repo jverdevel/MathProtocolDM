@@ -18,33 +18,33 @@ public class IpBasedNetworkPacketTest {
 		Assert.assertEquals(snapshot, pack.getTransportLayerData());
 		Assert.assertEquals(10, pack.getTotalLength());
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void checkIncorrectPackageNullOrigin() {
 		ITrafficSnapshot snapshot = Mockito.mock(ITrafficSnapshot.class);
 		new IpBasedNetworkPacket(null, "a", snapshot, 10);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void checkIncorrectPackageNullDestination() {
 		ITrafficSnapshot snapshot = Mockito.mock(ITrafficSnapshot.class);
 		new IpBasedNetworkPacket("a", null, snapshot, 10);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void checkIncorrectPackageNullData() {
 		new IpBasedNetworkPacket("a", "b", null, 10);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void checkNegativeLengthData() {
 		ITrafficSnapshot snapshot = Mockito.mock(ITrafficSnapshot.class);
 		new IpBasedNetworkPacket("a", "b", snapshot, -10);
 	}
-	
+
 	@Test
 	public void checkEquals() {
-	    EqualsVerifier.simple().forClass(IpBasedNetworkPacket.class).verify();
+		EqualsVerifier.simple().forClass(IpBasedNetworkPacket.class).verify();
 	}
-	
+
 }

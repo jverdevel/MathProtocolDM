@@ -6,13 +6,15 @@ import net.snapshot.ITrafficSnapshot;
 
 /**
  * Parser for a port-compatible transport protocol
+ * 
  * @author Javier Verde
  *
  */
 public interface IPortCompatibleTransportProtocolParser {
-	
+
 	/**
 	 * Process packet data for a traffic snapshot
+	 * 
 	 * @param snapshot snapshot
 	 * @return packet packet data
 	 * @throws ParseSnapshotException

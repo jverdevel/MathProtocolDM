@@ -4,38 +4,45 @@ import net.processed.application.IProcessedApplicationPacket;
 import net.protocols.application.stupidmath.pack.StupidMathPacket;
 
 /**
- * OP for stupid math. 
+ * OP for stupid math.
+ * 
  * @Javier Verde
  *
  */
 public class StupidMathOp implements IProcessedApplicationPacket {
 
-	//Better keep the processed OP and the packet data separate. Packet data here is useful, and we can use it as-is, but classes themselves should be kept separate, as we might want to add extra processed data to the OP in the future that wouldn't make sense in a packet-level
+	// Better keep the processed OP and the packet data separate. Packet data here
+	// is useful, and we can use it as-is, but classes themselves should be kept
+	// separate, as we might want to add extra processed data to the OP in the
+	// future that wouldn't make sense in a packet-level
 	private StupidMathPacket packet;
 
 	/**
-	 * Creates new operation data 
+	 * Creates new operation data
+	 * 
 	 * @param packet backing packet
 	 */
 	public StupidMathOp(StupidMathPacket packet) {
 		super();
 		this.validateInput(packet);
-		
+
 		this.packet = packet;
 	}
-	
+
 	/**
 	 * Validates that input is correct
+	 * 
 	 * @param packet packet data
 	 */
 	private void validateInput(StupidMathPacket packet) {
-		if(packet == null) {
+		if (packet == null) {
 			throw new IllegalArgumentException("Packet cannot be null");
 		}
 	}
 
 	/**
 	 * Gets the backing packet data
+	 * 
 	 * @return packet
 	 */
 	public StupidMathPacket getPacket() {
@@ -44,6 +51,7 @@ public class StupidMathOp implements IProcessedApplicationPacket {
 
 	/**
 	 * Get the operation value
+	 * 
 	 * @return operation value
 	 */
 	public String getOperation() {
@@ -52,6 +60,7 @@ public class StupidMathOp implements IProcessedApplicationPacket {
 
 	/**
 	 * Gets the value of the first operand
+	 * 
 	 * @return value
 	 */
 	public int getOperand1() {
@@ -60,6 +69,7 @@ public class StupidMathOp implements IProcessedApplicationPacket {
 
 	/**
 	 * Gets the value of the second operand
+	 * 
 	 * @return value
 	 */
 	public int getOperand2() {
@@ -90,11 +100,10 @@ public class StupidMathOp implements IProcessedApplicationPacket {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "StupidMathOp [packet=" + packet + "]";
 	}
-
 
 }

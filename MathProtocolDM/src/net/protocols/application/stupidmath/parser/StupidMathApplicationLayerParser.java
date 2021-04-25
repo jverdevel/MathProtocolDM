@@ -15,6 +15,7 @@ import net.snapshot.ITrafficSnapshot;
 
 /**
  * Parser for processing stupid-math-rpc packets
+ * 
  * @author Javier Verde
  *
  */
@@ -58,15 +59,18 @@ public class StupidMathApplicationLayerParser extends DefaultApplicationLayerPar
 		if (exception != null) {
 			throw exception;
 		}
-		
-		//VV: would be worth considering checking if first package doesn't refer to "use previous". Might be valid since it doesn't say it comes in the same packet, but would be worth checking with the full specification
+
+		// VV: would be worth considering checking if first package doesn't refer to
+		// "use previous". Might be valid since it doesn't say it comes in the same
+		// packet, but would be worth checking with the full specification
 		return tasks.stream().map(TaskExtractPacket::getResult).collect(Collectors.toList());
 	}
 
 	/**
 	 * Transforms the text into a task for each operation that needs to be extracted
+	 * 
 	 * @param snapshot snapshot
-	 * @param opcount expected count of operations
+	 * @param opcount  expected count of operations
 	 * @return a task for each operation to be parsed
 	 * @throws ParseSnapshotException
 	 */
@@ -106,6 +110,7 @@ public class StupidMathApplicationLayerParser extends DefaultApplicationLayerPar
 
 	/**
 	 * Task that turns string fragments into operations
+	 * 
 	 * @author Javier Verde
 	 *
 	 */
@@ -117,6 +122,7 @@ public class StupidMathApplicationLayerParser extends DefaultApplicationLayerPar
 
 		/**
 		 * VV: Creates the task
+		 * 
 		 * @param snapshot string fragment
 		 */
 		public TaskExtractPacket(ITrafficSnapshot snapshot) {
@@ -125,7 +131,8 @@ public class StupidMathApplicationLayerParser extends DefaultApplicationLayerPar
 		}
 
 		/**
-		 * VV: Calculates the result. If there's an exception, doesn't throw it but instead stores it
+		 * VV: Calculates the result. If there's an exception, doesn't throw it but
+		 * instead stores it
 		 */
 		public void calculateResult() {
 			if (this.result != null || this.parseException != null) {
@@ -189,6 +196,7 @@ public class StupidMathApplicationLayerParser extends DefaultApplicationLayerPar
 
 		/**
 		 * VV: Resolves a string to a valid number according to stupid-math-rpc protocol
+		 * 
 		 * @param operand operand
 		 * @return number
 		 */
@@ -201,6 +209,7 @@ public class StupidMathApplicationLayerParser extends DefaultApplicationLayerPar
 
 		/**
 		 * Validates that brackets are in text in their correct places
+		 * 
 		 * @param subString string to validate
 		 * @return exception, null if it's correct
 		 */
@@ -224,6 +233,7 @@ public class StupidMathApplicationLayerParser extends DefaultApplicationLayerPar
 
 		/**
 		 * VV: Gets the calculated results
+		 * 
 		 * @return result. Null if not calculated or if there was an exception
 		 */
 		public StupidMathPacket getResult() {
@@ -232,6 +242,7 @@ public class StupidMathApplicationLayerParser extends DefaultApplicationLayerPar
 
 		/**
 		 * VV: Gets any parse exception that happened during work
+		 * 
 		 * @return exception, null if not calculated or if all was okay
 		 */
 		public ParseSnapshotException getParseException() {

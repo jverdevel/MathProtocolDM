@@ -12,23 +12,23 @@ import net.snapshot.ITrafficSnapshot;
 
 /**
  * VV: Parwser for processed stupid math operation packages
+ * 
  * @author Javier Verde
  *
  */
-public class StupidMathOpParser implements IProcessedApplicationParser<StupidMathOp>{
+public class StupidMathOpParser implements IProcessedApplicationParser<StupidMathOp> {
 
 	private StupidMathApplicationLayerParser applicationLayerParser;
-	
-	
+
 	public StupidMathOpParser(StupidMathApplicationLayerParser applicationLayerParser) {
 		super();
-		this.validateInput(applicationLayerParser);		
-		
+		this.validateInput(applicationLayerParser);
+
 		this.applicationLayerParser = applicationLayerParser;
 	}
-	
+
 	private void validateInput(StupidMathApplicationLayerParser applicationLayerParser) {
-		if(applicationLayerParser == null) {
+		if (applicationLayerParser == null) {
 			throw new IllegalArgumentException("Cannot use a null parser");
 		}
 	}
@@ -36,13 +36,15 @@ public class StupidMathOpParser implements IProcessedApplicationParser<StupidMat
 	@Override
 	public List<StupidMathOp> parsePackets(ITrafficSnapshot snapshot) throws ParseSnapshotException {
 		List<StupidMathPacket> packets = this.applicationLayerParser.parsePackets(snapshot);
-	
-		//it's very unlikely this is ever going to take any important amount of time, so no need to do it in a task format
+
+		// it's very unlikely this is ever going to take any important amount of time,
+		// so no need to do it in a task format
 		return packets.stream().map(this::createOp).collect(Collectors.toList());
 	}
-	
+
 	/**
 	 * Transforms the packet into a processed packet
+	 * 
 	 * @param packet packet to process
 	 * @return processed package
 	 */

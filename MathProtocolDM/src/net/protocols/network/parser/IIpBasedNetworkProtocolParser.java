@@ -6,6 +6,7 @@ import net.snapshot.ITrafficSnapshot;
 
 /**
  * Parser for a port-compatible network protocol
+ * 
  * @author Javier Verde
  *
  */
@@ -13,6 +14,7 @@ public interface IIpBasedNetworkProtocolParser {
 
 	/**
 	 * Process packet data for a traffic snapshot
+	 * 
 	 * @param snapshot snapshot
 	 * @return packet packet data
 	 * @throws ParseSnapshotException
