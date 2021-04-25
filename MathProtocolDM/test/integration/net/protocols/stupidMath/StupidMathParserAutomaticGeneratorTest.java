@@ -12,6 +12,8 @@ import integration.net.protocols.ParserAutomaticGeneratorTest;
 import net.processed.application.stupidMath.StupidMathOp;
 import net.protocols.application.stupidmath.pack.StupidMathPacket;
 import net.protocols.application.stupidmath.parser.StupidMathApplicationLayerParser;
+import net.protocols.parser.NetworkTrafficParser;
+import net.protocols.stupidmath.NetworkTrafficStupidMathParserProvider;
 
 /**
  * This is a generator of large Comm sets that can be turned into Strings and
@@ -51,6 +53,12 @@ public class StupidMathParserAutomaticGeneratorTest extends ParserAutomaticGener
 	@Test
 	public void integrationTestLongTest() {
 		this.doTest(LONG_SEED, LONG_SIZE);
+	}
+
+	@Override
+	protected NetworkTrafficParser<StupidMathOp> initParser() {
+		NetworkTrafficStupidMathParserProvider provider = new NetworkTrafficStupidMathParserProvider();
+		return provider.getParser();
 	}
 
 	@Override

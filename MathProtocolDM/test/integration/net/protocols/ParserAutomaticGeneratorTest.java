@@ -14,8 +14,7 @@ import net.processed.AddressPort;
 import net.processed.Comm;
 import net.processed.Msg;
 import net.processed.application.IProcessedApplicationPacket;
-import net.processed.application.stupidMath.StupidMathOp;
-import net.protocols.stupidmath.NetworkTrafficStupidMathParserProvider;
+import net.protocols.parser.NetworkTrafficParser;
 
 /**
  * Base class for automatically generating large snapshots for the parser.
@@ -41,8 +40,8 @@ public abstract class ParserAutomaticGeneratorTest<T extends IProcessedApplicati
 	 */
 	protected final void doTest(long seed, int numComms) {
 		SnapshotAndExpectedComms<T> testCase = this.generateTestCase(seed, numComms);
-		NetworkTrafficStupidMathParserProvider provider = new NetworkTrafficStupidMathParserProvider();
-		List<Comm<StupidMathOp>> result = provider.getParser().crunch(testCase.getSnapshot().getBytes());
+		NetworkTrafficParser<T> parser = this.initParser();
+		List<Comm<T>> result = parser.crunch(testCase.getSnapshot().getBytes());
 
 		// Since we are going to try potentially very big sizes of data ,doing an assert
 		// on the whole list is not the best idea, since Junit is very aggressive for
@@ -53,6 +52,8 @@ public abstract class ParserAutomaticGeneratorTest<T extends IProcessedApplicati
 			Assert.assertEquals(testCase.getExpectedComms().get(i), result.get(i));
 		}
 	}
+
+	protected abstract NetworkTrafficParser<T> initParser();
 
 	/**
 	 * Generates a valid random communication
