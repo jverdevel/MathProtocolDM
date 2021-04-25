@@ -3,17 +3,14 @@ package net.snapshot;
 import java.util.Arrays;
 
 /**
- * VV: Traffic snapshot based on a byte array. Assumes default codification
+ * VV: Traffic snapshot based on a byte array. Assumes ISO-8859-1 codification
  * 
  * @author Javier Verde
  *
  */
-public class ByteArrayBasedTrafficSnapshot implements ITrafficSnapshot {
+public class ByteArrayBasedTrafficSnapshot extends DefaultTrafficSnapshot {
 
 	private byte[] array;
-
-	private int start;
-	private int end;
 
 	private static final int BYTES_PER_CHAR = 1;
 
@@ -38,40 +35,27 @@ public class ByteArrayBasedTrafficSnapshot implements ITrafficSnapshot {
 	 *              Exclusive
 	 */
 	private ByteArrayBasedTrafficSnapshot(byte[] array, int start, int end) {
-		this.validateInput(array, start, end);
+		super(start, end);
+		this.validateInput(array);
 		this.array = array;
-		this.start = start;
-		this.end = end;
 	}
 
 	/**
-	 * VAlidates the input is correct, and throws an exception in other case
+	 * Validates the input is correct, and throws an exception in other case
 	 * 
 	 * @param array backing array
-	 * @param start first character considered part of the snapshot. Inclusive
-	 * @param end   Last character considered part of the snapshot
 	 */
-	private void validateInput(byte[] array, int start, int end) {
+	private void validateInput(byte[] array) {
 		if (array == null) {
 			throw new IllegalArgumentException("Backing array cannot be null");
 		}
 		if (array.length % BYTES_PER_CHAR != 0) {
 			throw new IllegalArgumentException("Array doesn't contain pairs of bytes");
 		}
-		if (start > end) {
-			throw new IllegalArgumentException("end must be greater than start");
-		}
+
 		if (end * BYTES_PER_CHAR > array.length) {
 			throw new IllegalArgumentException("End cannot be greater than snapshot length");
 		}
-		if (start < 0) {
-			throw new IllegalArgumentException("Start must be a positive value");
-		}
-	}
-
-	@Override
-	public int getLength() {
-		return this.end - this.start;
 	}
 
 	@Override
@@ -85,27 +69,6 @@ public class ByteArrayBasedTrafficSnapshot implements ITrafficSnapshot {
 			tmpByteArray[i - bytePositionFrom] = this.array[i];
 		}
 		return new String(tmpByteArray);
-		// return new String(tmpByteArray, CODIFICATION);
-	}
-
-	/**
-	 * Checks that the index position is valid
-	 * 
-	 * @param from first character considered part of the array
-	 * @param to   last character considered part of the array
-	 */
-	private void checkValidIndexes(int from, int to) {
-		if (from > to) {
-			throw new IllegalArgumentException("to must be greater than from");
-		}
-		if (from < 0) {
-			throw new IllegalArgumentException("from must be a positive value");
-		}
-		int currentLength = this.end - this.start;
-		if (to > currentLength) {
-			throw new IllegalArgumentException("to is greater than current length");
-		}
-
 	}
 
 	@Override
@@ -120,17 +83,10 @@ public class ByteArrayBasedTrafficSnapshot implements ITrafficSnapshot {
 	}
 
 	@Override
-	public int translateLocalPositionToCompletePosition(int relativePosition) {
-		return this.start + relativePosition;
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + Arrays.hashCode(array);
-		result = prime * result + end;
-		result = prime * result + start;
 		return result;
 	}
 
@@ -138,16 +94,12 @@ public class ByteArrayBasedTrafficSnapshot implements ITrafficSnapshot {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		ByteArrayBasedTrafficSnapshot other = (ByteArrayBasedTrafficSnapshot) obj;
 		if (!Arrays.equals(array, other.array))
-			return false;
-		if (end != other.end)
-			return false;
-		if (start != other.start)
 			return false;
 		return true;
 	}

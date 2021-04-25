@@ -18,6 +18,7 @@ public class NetworkTrafficStupidMathParserProvider {
 
 	/**
 	 * Compose and return the parser for the Stupid-Math protocol
+	 * 
 	 * @return parser
 	 */
 	public NetworkTrafficParser<StupidMathOp> getParser() {

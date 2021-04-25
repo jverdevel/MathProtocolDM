@@ -47,7 +47,8 @@ public class NetworkTrafficParser<T extends IProcessedApplicationPacket> {
 	 * @param snapshotGenerator generator for snapshots
 	 */
 	public NetworkTrafficParser(IIpBasedNetworkProtocolParser networkParser,
-			IPortCompatibleTransportProtocolParser transportParser, IProcessedApplicationParser<T> applicationParser, ISnapshotGenerator snapshotGenerator) {
+			IPortCompatibleTransportProtocolParser transportParser, IProcessedApplicationParser<T> applicationParser,
+			ISnapshotGenerator snapshotGenerator) {
 		super();
 		this.validateInput(networkParser, transportParser, applicationParser, snapshotGenerator);
 
@@ -66,7 +67,8 @@ public class NetworkTrafficParser<T extends IProcessedApplicationPacket> {
 	 * @param snapshotGenerator generator for snapshots
 	 */
 	private void validateInput(IIpBasedNetworkProtocolParser networkParser,
-			IPortCompatibleTransportProtocolParser transportParser, IProcessedApplicationParser<T> applicationParser, ISnapshotGenerator snapshotGenerator) {
+			IPortCompatibleTransportProtocolParser transportParser, IProcessedApplicationParser<T> applicationParser,
+			ISnapshotGenerator snapshotGenerator) {
 		if (networkParser == null) {
 			throw new IllegalArgumentException("Network parser cannot be null");
 		}
@@ -76,7 +78,7 @@ public class NetworkTrafficParser<T extends IProcessedApplicationPacket> {
 		if (applicationParser == null) {
 			throw new IllegalArgumentException("Application parser cannot be null");
 		}
-		if(snapshotGenerator == null) {
+		if (snapshotGenerator == null) {
 			throw new IllegalArgumentException("Snapshot generator cannot be null");
 		}
 	}
