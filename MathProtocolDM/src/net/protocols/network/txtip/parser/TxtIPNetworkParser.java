@@ -42,7 +42,7 @@ public class TxtIPNetworkParser extends DefaultSnapshotTxtBasedParser implements
 		ITrafficSnapshot remains = snapshot.getSnapshotFragment(dataLength.getStart(), endRemains);
 		return new IpBasedNetworkPacket(ipFrom, ipTo, remains, endRemains);
 	}
-
+	
 	@Override
 	public List<IpBasedNetworkPacket> processPackages(ITrafficSnapshot snapshot) throws ParseSnapshotException {
 		ITrafficSnapshot currentSnapshot = snapshot;

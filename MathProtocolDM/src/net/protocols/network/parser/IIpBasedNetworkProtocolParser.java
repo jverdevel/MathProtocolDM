@@ -22,10 +22,9 @@ public interface IIpBasedNetworkProtocolParser {
 	 * @throws ParseSnapshotException
 	 */
 	public IpBasedNetworkPacket processPackage(ITrafficSnapshot snapshot) throws ParseSnapshotException;
-
+	
 	/**
 	 * Processes all packet data for a traffic snapshot
-	 * 
 	 * @param snapshot snapshot
 	 * @return packet data
 	 * @throws ParseSnapshotException

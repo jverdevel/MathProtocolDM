@@ -40,8 +40,8 @@ public class TxtIPNetworkParserTest {
 		Assert.assertEquals(VALID_PACKAGE_2.length(), networkPackage.getTotalLength());
 	}
 
-	@Test
-	public void checkMultiProcessing() throws ParseSnapshotException {
+	@Test 
+	public void checkMultiProcessing() throws ParseSnapshotException{
 		ITrafficSnapshot firstSnapshot = Mockito.mock(ITrafficSnapshot.class);
 		Mockito.when(firstSnapshot.getLength()).thenReturn(1);
 		ITrafficSnapshot secondSnapshot = Mockito.mock(ITrafficSnapshot.class);
@@ -50,16 +50,17 @@ public class TxtIPNetworkParserTest {
 		Mockito.when(lastSnapshot.getLength()).thenReturn(0);
 		Mockito.when(firstSnapshot.getSnapshotFragment(Mockito.anyInt(), Mockito.anyInt())).thenReturn(secondSnapshot);
 		Mockito.when(secondSnapshot.getSnapshotFragment(Mockito.anyInt(), Mockito.anyInt())).thenReturn(lastSnapshot);
-
+		
 		IpBasedNetworkPacket mockedPacket = Mockito.mock(IpBasedNetworkPacket.class);
 		TxtIPNetworkParser spyParser = Mockito.mock(TxtIPNetworkParser.class);
 		Mockito.when(spyParser.processPackage(Mockito.any())).thenReturn(mockedPacket);
 		Mockito.when(spyParser.processPackages(firstSnapshot)).thenCallRealMethod();
-
+		
 		List<IpBasedNetworkPacket> packages = spyParser.processPackages(firstSnapshot);
 		Assert.assertEquals(2, packages.size());
 	}
-
+	
+	
 	@Test(expected = ParseSnapshotException.class)
 	public void checkInvalidTooShort() throws ParseSnapshotException {
 		this.testNetworkPackage(INVALID_PACKAGE_TOO_SHORT, 0, 2);
