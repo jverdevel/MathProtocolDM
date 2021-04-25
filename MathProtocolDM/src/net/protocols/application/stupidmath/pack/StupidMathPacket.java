@@ -5,7 +5,6 @@ import java.util.Set;
 import net.processed.application.IProcessedApplicationPacket;
 import net.protocols.application.IApplicationLayerPacket;
 
-//TODO: I think I'm actually going to put these two together
 /**
  * Processed operation used by the StupidMath application layer
  * 
