@@ -29,6 +29,12 @@ public class Comm<T extends IProcessedApplicationPacket> {
 		this.response = response;
 	}
 
+	/**
+	 * Makes sure input is correct, throws an exception otherwise
+	 * 
+	 * @param request  request message
+	 * @param response response message
+	 */
 	private void validateInput(Msg<T> request, Msg<T> response) {
 		if (request == null || response == null) {
 			throw new IllegalArgumentException("Request and response can't be null");

@@ -16,7 +16,7 @@ public class ParseSnapshotException extends RuntimeException {
 	private int position;
 
 	/**
-	 * VV: Creates a parse exception
+	 * Creates a parse exception
 	 * 
 	 * @param snapshot snapshot used
 	 * @param layer    layer where the error happened
