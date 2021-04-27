@@ -60,7 +60,7 @@ public class StupidMathApplicationLayerParser extends DefaultApplicationLayerPar
 			throw exception;
 		}
 
-		// VV: would be worth considering checking if first package doesn't refer to
+		// would be worth considering checking if first package doesn't refer to
 		// "use previous". Might be valid since it doesn't say it comes in the same
 		// packet, but would be worth checking with the full specification
 		return tasks.stream().map(TaskExtractPacket::getResult).collect(Collectors.toList());

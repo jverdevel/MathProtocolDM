@@ -20,6 +20,11 @@ public class StupidMathOpParser implements IProcessedApplicationParser<StupidMat
 
 	private StupidMathApplicationLayerParser applicationLayerParser;
 
+	/**
+	 * Creates a parser for the stupid math protocol
+	 * 
+	 * @param applicationLayerParser parser for the raw packets
+	 */
 	public StupidMathOpParser(StupidMathApplicationLayerParser applicationLayerParser) {
 		super();
 		this.validateInput(applicationLayerParser);
@@ -27,6 +32,11 @@ public class StupidMathOpParser implements IProcessedApplicationParser<StupidMat
 		this.applicationLayerParser = applicationLayerParser;
 	}
 
+	/**
+	 * Ensures the input is correct, throws an exception if it's not
+	 * 
+	 * @param applicationLayerParser parser for the raw packets
+	 */
 	private void validateInput(StupidMathApplicationLayerParser applicationLayerParser) {
 		if (applicationLayerParser == null) {
 			throw new IllegalArgumentException("Cannot use a null parser");

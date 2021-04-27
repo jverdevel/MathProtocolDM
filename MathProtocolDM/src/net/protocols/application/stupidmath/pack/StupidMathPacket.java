@@ -62,6 +62,11 @@ public class StupidMathPacket implements IApplicationLayerPacket {
 		this.validateSecondOperandResult(operation, operand2);
 	}
 
+	/**
+	 * VV: Validates the string operation is valid
+	 * 
+	 * @param operation operation, throws exception if it's not
+	 */
 	private void validateOperation(String operation) {
 		if (operation == null || !VALID_OPERATIONS.contains(operation)) {
 			throw new IllegalArgumentException("Operation isn't valid");
@@ -69,7 +74,7 @@ public class StupidMathPacket implements IApplicationLayerPacket {
 	}
 
 	/**
-	 * Validates that the operand has a expected value
+	 * Validates that the operand has an expected value
 	 * 
 	 * @param operand operand
 	 */
@@ -79,6 +84,12 @@ public class StupidMathPacket implements IApplicationLayerPacket {
 		}
 	}
 
+	/**
+	 * VV: Validates that the second operand has an expected value
+	 * 
+	 * @param operation operation used
+	 * @param operand2  operand
+	 */
 	private void validateSecondOperandResult(String operation, int operand2) {
 		if (operation.equals(OPERATION_RESULT) && operand2 != EXPECTED_OPERAND_2_RESULT) {
 			throw new IllegalArgumentException(

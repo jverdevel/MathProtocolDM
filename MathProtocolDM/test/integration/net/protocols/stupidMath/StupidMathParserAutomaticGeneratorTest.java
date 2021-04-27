@@ -35,7 +35,7 @@ public class StupidMathParserAutomaticGeneratorTest extends ParserAutomaticGener
 
 	private static final int SHORT_SIZE = 100;
 	private static final int MEDIUM_SIZE = 50000;
-	private static final int LONG_SIZE = 1_000_000;
+	private static final int LONG_SIZE = 500_000;
 
 	private static final String[] VALID_NON_RESPONSE_OPERATIONS = new String[] { StupidMathPacket.OPERATION_SUM,
 			StupidMathPacket.OPERATION_MINUS, StupidMathPacket.OPERATION_PRODUCT, StupidMathPacket.OPERATION_DIVIDE };
